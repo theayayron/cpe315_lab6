@@ -18,15 +18,19 @@ void extract_float(float f, INTFLOAT_PTR xp)
      return;
      }
 
+ /* extracting exponent */
+  xp->exponent = ((int)((uintf & 0x7FFFFFFF) >> 23)) - 126;
 
-/* ... Your code goes here ... and the rest is yours. */
+  /* extracting fraction */
+  xp->fraction = 0x00800000;
+  xp->fraction = xp->fraction | uintf;
+  xp->fraction = xp->fraction & 0x00FFFFFF;
+  xp->fraction = xp->fraction << 7;
 
-  xp->fraction = 0x40000000; xp->exponent = 1;   /* SET A DEFAULT=1.0 -- DELETE THIS LINE AFTER YOU IMPLEMENT YOUR CODE */
-
-/* --- */
-
-
-
+  /* testing signed bit */
+  if(f < 0) {
+    xp->fraction = -xp->fraction;
+  }
 
   return;
   }
