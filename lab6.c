@@ -5,19 +5,22 @@
 
 /* Example test case 3.5 */
 
+void extract_float_test(float x) {
+  INTFLOAT y;
+  extract_float(x, &y);
+  printf("Float is: %3.1f Fraction is: 0x%08X, Exponent is: 0x%08X\n", x, y.fraction, y.exponent);
+}
 
 int main()
   {
-  INTFLOAT x;
+    INTFLOAT x;
   unsigned int i;
 
-  extract_float( 4.0, &x);
-
-
-/* Display the result */
-
-  printf("Fraction is: 0x%08X, Exponent is: 0x%08X\n", x.fraction, x.exponent);
-
+  extract_float_test( 4.0);
+  extract_float_test(1.0);
+  extract_float_test(-4.0);
+  extract_float_test(62.5);
+  extract_float_test(-33.0);
 
   printf("Now do a performance test, repeating 1x10^9 times.\n");
 
